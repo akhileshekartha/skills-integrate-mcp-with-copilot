@@ -20,32 +20,17 @@
     </header>
 
     <main>
-      <section id="activities-container">
-        <h3>Available Activities</h3>
-        <div id="activities-list">
-          <!-- Activities will be loaded here -->
-          <p>Loading activities...</p>
-        </div>
+      <section id="activity-intro">
+        <h3>Activity Board</h3>
+        <p id="auth-hint" class="info-note">Teacher login is required to register or unregister students.</p>
+        <div id="message" class="hidden"></div>
       </section>
 
-      <section id="signup-container">
-        <h3>Register Student (Teachers Only)</h3>
-        <p id="auth-hint" class="info-note">Teacher login is required to register or unregister students.</p>
-        <form id="signup-form">
-          <div class="form-group">
-            <label for="email">Student Email:</label>
-            <input type="email" id="email" required placeholder="your-email@mergington.edu" />
-          </div>
-          <div class="form-group">
-            <label for="activity">Select Activity:</label>
-            <select id="activity" required>
-              <option value="">-- Select an activity --</option>
-              <!-- Activity options will be loaded here -->
-            </select>
-          </div>
-          <button type="submit">Sign Up</button>
-        </form>
-        <div id="message" class="hidden"></div>
+      <section id="activities-container">
+        <h3>Available Activities</h3>
+        <div id="activities-list" class="activity-grid">
+          <p>Loading activities...</p>
+        </div>
       </section>
     </main>
 
@@ -68,6 +53,23 @@
           <div class="modal-actions">
             <button type="button" id="cancel-login">Cancel</button>
             <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="register-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="register-modal-title">
+      <div class="modal-content">
+        <h3 id="register-modal-title">Register Student</h3>
+        <form id="register-form">
+          <p class="modal-activity">Activity: <strong id="register-activity-name"></strong></p>
+          <div class="form-group">
+            <label for="register-email">Student Email:</label>
+            <input type="email" id="register-email" required placeholder="student@mergington.edu" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" id="cancel-register">Cancel</button>
+            <button type="submit">Register Student</button>
           </div>
         </form>
       </div>
