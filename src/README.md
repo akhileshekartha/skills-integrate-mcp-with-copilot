@@ -1,50 +1,46 @@
-# Mergington High School Activities API
+# Source Folder Guide
 
-A super simple FastAPI application that allows students to view and sign up for extracurricular activities.
+This directory contains the runnable FastAPI service and static frontend.
 
-## Features
+## Contents
 
-- View all available extracurricular activities
-- Sign up for activities
+- `app.py`: FastAPI app, in-memory activities data, and authentication endpoints
+- `teachers.json`: local teacher credentials used by the login endpoint
+- `static/index.html`: frontend page
+- `static/app.js`: frontend behavior for login, registration, and unregister actions
+- `static/styles.css`: frontend styling
 
-## Getting Started
+## Run from this Folder
 
-1. Install the dependencies:
+Install dependencies from the repository root or this folder:
 
-   ```
-   pip install fastapi uvicorn
-   ```
+```bash
+pip install -r ../requirements.txt
+```
 
-2. Run the application:
+Start the app:
 
-   ```
-   python app.py
-   ```
+```bash
+uvicorn app:app --reload
+```
 
-3. Open your browser and go to:
-   - API documentation: http://localhost:8000/docs
-   - Alternative documentation: http://localhost:8000/redoc
+Open:
 
-## API Endpoints
+- UI: http://localhost:8000/
+- Swagger: http://localhost:8000/docs
 
-| Method | Endpoint                                                          | Description                                                         |
-| ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
-| GET    | `/activities`                                                     | Get all activities with their details and current participant count |
-| POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+## Auth Notes
 
-## Data Model
+- Login: `POST /auth/login`
+- Logout: `POST /auth/logout`
+- Protected actions require `X-Teacher-Token`
 
-The application uses a simple data model with meaningful identifiers:
+Protected endpoints:
 
-1. **Activities** - Uses activity name as identifier:
+- `POST /activities/{activity_name}/signup?email=...`
+- `DELETE /activities/{activity_name}/unregister?email=...`
 
-   - Description
-   - Schedule
-   - Maximum number of participants allowed
-   - List of student emails who are signed up
+## Important Behavior
 
-2. **Students** - Uses email as identifier:
-   - Name
-   - Grade level
-
-All data is stored in memory, which means data will be reset when the server restarts.
+- Data is in-memory only.
+- Restarting the app clears active login sessions and activity changes.
